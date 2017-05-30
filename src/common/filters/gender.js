@@ -21,6 +21,6 @@ Vue.filter('gender', function (key) {
     return dict;
   }
 
-  let item = _.find(dict, { value: key });
+  const item = _.find(dict, { value: key });
   return item ? item.label : key;
 });
