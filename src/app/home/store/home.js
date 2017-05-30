@@ -1,6 +1,6 @@
 export default {
   state: {
-    test:'Go To News'
+    test: 1,
   },
   mutations: {
     testFun: function () {

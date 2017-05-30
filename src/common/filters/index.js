@@ -1,3 +1,5 @@
-Vue.filter('text',function(value) {
-  return value ? '注册' : '登录';
-});
+import Gender from './gender';
+
+export default {
+  Gender,
+}

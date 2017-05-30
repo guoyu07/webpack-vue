@@ -23,6 +23,7 @@ let aliasList = {};
 aliasList = {
   vue   : 'vue/dist/vue.common.js',
   assets: path.join(ROOT_PATH, 'src/assets/'),
+  common: path.join(ROOT_PATH, 'src/common/'),
 }
 
 moduleList.forEach(function (elem) {
