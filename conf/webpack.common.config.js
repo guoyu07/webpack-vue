@@ -19,6 +19,9 @@ DOMAIN_MODULES.forEach((elem) => {
   }
 });
 
+/**
+ * 启用别名，方便模块引入
+ */
 let aliasList = {};
 
 aliasList = {
@@ -27,6 +30,10 @@ aliasList = {
   '~common': path.join(ROOT_PATH, 'src/common/'),
 };
 
+/**
+ * 多入口配置store别名
+ * ~home/store
+ */
 moduleList.forEach(function (elem) {
   const SPRITE_DIR = `${APP_PATH}/${elem}`;
   if (fs.existsSync(SPRITE_DIR) && fs.lstatSync(SPRITE_DIR).isDirectory()) {

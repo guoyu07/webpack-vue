@@ -1,8 +1,11 @@
 import Vue    from 'vue';
 import Router from 'vue-router';
 
-import Home   from '../components/home';
-import News   from '../components/news';
+/**
+ * 异步按需加载模块
+ */
+const Home = resolve => require(['../components/home'], resolve);
+const News = resolve => require(['../components/news'], resolve);
 
 Vue.use(Router);
 
