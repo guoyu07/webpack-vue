@@ -1,0 +1,15 @@
+@import "~assets/styles/public";
+
+.home {
+  font-size: 14px;
+
+  &:before {
+    content: ' ';
+    display: inline-block;
+    background: url('~assets/images/logo.png') center center no-repeat;
+  }
+
+  > button {
+    border: none;
+  }
+}
