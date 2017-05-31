@@ -1,5 +1,4 @@
 const fs                = require('fs');
-const path              = require('path');
 const _                 = require('lodash');
 const webpack           = require('webpack');
 const WebpackMerger     = require('webpack-merge');
@@ -8,13 +7,9 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpackConfig     = require('./webpack.common.config');
 
 const {
-  ROOT_PATH,
   DLIENT_PORT,
   DIST_PATH
 }                       = require('./config');
-
-
-const testPath = path.join(ROOT_PATH, './dist');
 
 const Config =  WebpackMerger(webpackConfig, {
   devtool : 'source-map',
@@ -24,21 +19,24 @@ const Config =  WebpackMerger(webpackConfig, {
      * 用于本地调试
      * https://www.browsersync.io
      */
-    new BrowserSyncPlugin({
-      host      : 'localhost',
-      port      : DLIENT_PORT,
-      open      : false,
-      logLevel  : 'debug',
-      server    : {
-        baseDir : [testPath],
-      },
-      ui: {
-        port: DLIENT_PORT + 1,
-        weinre: {
-          port: DLIENT_PORT + 2,
+    new BrowserSyncPlugin(
+      {
+        host      : 'localhost',
+        port      : DLIENT_PORT,
+        open      : false,
+        logLevel  : 'debug',
+        server    : {
+          baseDir : [DIST_PATH],
         },
-      },
-    }),
+        host: 'localhost',
+        ui: {
+          port: DLIENT_PORT + 1,
+          weinre: {
+            port: DLIENT_PORT + 2,
+          },
+        },
+      }
+    ),
   ],
 });
 

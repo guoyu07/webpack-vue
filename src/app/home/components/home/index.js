@@ -4,7 +4,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Home',
+      msg: 'Home53',
       test1: Store.state.Home.test,
     };
   },
