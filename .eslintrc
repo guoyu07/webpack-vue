@@ -296,6 +296,11 @@
     // nodejs 全局变量
     "node": true,
   },
-
+  "globals" : {
+    "$axios": false,
+    "$store": false,
+    "APIs": false,
+    "__PROJECTDIR__": false,
+  },
   "parser": "babel-eslint"
 }

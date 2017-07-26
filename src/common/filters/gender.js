@@ -11,10 +11,6 @@ Vue.filter('gender', function (key) {
       label: '女',
       value: 2,
     },
-    {
-      label: '保密',
-      value: 0,
-    },
   ];
 
   if (_.isObject(key) || _.isArray(key)) {

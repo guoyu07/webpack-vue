@@ -1,0 +1,40 @@
+/**
+ * Design Size
+ */
+
+$ratio-design                 : 750px/375px; // IPhone 6
+
+/**
+ * Bourbon Rewrite
+ */
+
+$em-base    : 16px;
+
+/**
+ * Base Definations
+ */
+
+$root-base  : $em-base;
+
+
+/*灰度*/
+$blk        : #222 !default;
+$grayDark   : #777 !default;
+$grayLight  : #aaa !default;
+
+/*边色*/
+$lineCol    : #efefef !default;
+
+/*底色*/
+$bgCol      : #F6F6F9 !default;
+
+/*主色*/
+$mainCol    : #ec5151 !default;
+
+/*透明度*/
+$opa        : .7 !default;
+
+/*字号*/
+$fontS      : rem(13px) !default;
+$fontM      : rem(15px) !default;
+$fontL      : rem(17px) !default;

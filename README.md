@@ -32,6 +32,8 @@ $ 2、yarn
 
 # yarn安装依赖包
 $ yarn add xxx --dev
+
+$  设置从缓存安装 yarn config set yarn-offline-mirror ./npm-packages-offline-cache
 ```
 
 #### Nginx 配置文件导入

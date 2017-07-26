@@ -1,22 +1,19 @@
-import Store from '~home/store';
+import './index.scss';
 
 export default {
   name: 'home',
   data () {
     return {
-      msg: 'Home53',
-      test1: Store.state.Home.test,
     };
   },
+  components: {
+  },
   computed: {
-    test: function () {
-      return Store.state.Home.test;
-    },
+  },
+  mounted () {
+  },
+  watch: {
   },
   methods: {
-    testClick: function () {
-      Store.commit('testFun');
-      Store.dispatch('testAct');
-    }
   }
 };

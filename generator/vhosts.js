@@ -10,7 +10,7 @@ const {
   DIST_PATH,
   ROOT_PATH,
   LOG_PATH
-}                       = require('../conf/config');
+}                       = require('../config/conf');
 
 handlebars.registerHelper('compare', function (lvalue, operator, rvalue, options) {
   let operators;
@@ -84,24 +84,54 @@ let fn       = handlebars.compile(template);
 let exists  = [];
 let entries = [];
 let datas   = DOMAIN_MODULES
+
 .filter((row) => {
   if (-1 !== _.indexOf(exists, row.domain)) {
     console.error(`Module ${row.domain} is already exists.`.red);
     return false;
   }
 
-  if (!_.isString(row.domain)) {
+  if (!_.isString(row.domain) && !_.isArray(row.domain)) {
     console.error('Module domain must be a string or array'.red);
     return false;
+  }
+
+  if ('proxy' === row.type) {
+    if (!(_.isArray(row.entries) && row.entries.length > 0)) {
+      console.error('Entries must be a array, and size not less than 1.'.red);
+      return false;
+    }
+
+    if (!(_.isString(row.proxy) && /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/.exec(row.proxy))) {
+      console.warn('Proxy is requied, and must be proxy ip address. it would auto set proxy to 127.0.0.1'.yellow);
+      row.proxy = '127.0.0.1';
+    }
+
+    if (!_.isNumber(row.proxyPort)) {
+      console.warn('Proxy port is requied, and must be a number it would auto set proxy port to 3030'.yellow);
+      row.proxyPort = 3030;
+    }
+  }
+
+  if (_.isArray(row.domain)) {
+    _.forEach(row.domain, function (domain) {
+      console.log(`Server config ${domain} is ok.\n`.green);
+    });
+  }
+  else {
+    console.log(`Server config ${row.domain} is ok.\n`.green);
   }
 
   exists.push(row.domain);
   return true;
 })
 .map((row) => {
-  if (!_.isEmpty(row.path)) {
-    entries.push(row.path);
+  if (_.isArray(row.entries)) {
+    return Object.assign({}, row, {
+      division: row.entries.join('|'),
+    });
   }
+
   return row;
 });
 
@@ -112,7 +142,6 @@ let source = fn({
   buildDir  : DIST_PATH.replace(/\\/gi, '/'),
   assetsDir : DIST_PATH.replace(/\\/gi, '/'),
   logsDir   : LOG_PATH.replace(/\\/gi, '/'),
-  division  : entries.join('|'),
   modules   : datas,
 });
 

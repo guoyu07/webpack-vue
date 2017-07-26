@@ -3,10 +3,6 @@
 
 
 # Temporary folders
-.temporary
-.dist
-.happypack
-.webpack_cache
 dist
 /vhosts
 

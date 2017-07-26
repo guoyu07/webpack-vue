@@ -1,5 +1,5 @@
 {{#each modules}}
-  {{#compare '' '!=' domain}}
+  {{#compare 'proxy' '===' type}}
     server {
       listen 80;
       server_name {{{domain domain}}};
@@ -12,8 +12,8 @@
 
       location = / {
         add_header Cache-Control "no-store, no-cache, private";
-        try_files $uri /{{{domain path}}}.html;
-        proxy_pass http://127.0.0.1:{{ ../proxyPort }}/{{{domain path}}}.html;
+        try_files $uri /{{ entries.[0] }}.html;
+        proxy_pass http://127.0.0.1:{{ ../proxyPort }}/{{ entries.[0] }}.html;
       }
 
       location / {
@@ -25,10 +25,10 @@
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        # try_files $uri $uri/ /{{{domain path}}}.html;
+        # try_files $uri $uri/ /{{ entries.[0] }}.html;
       }
 
-      location ~* ^/({{ ../division }})/ {
+      location ~* ^/({{ division }})/ {
         add_header Cache-Control "no-store, no-cache, private";
         try_files $uri /$1.html @proxy_module;
       }
@@ -52,10 +52,10 @@
     }
   {{/compare}}
 
-  {{#compare '' '!=' cdn}}
+  {{#compare 'cdn' '===' type}}
     server {
       listen 80;
-      server_name {{{domain cdn}}};
+      server_name {{#domain domain}}{{/domain}};
       root {{ ../assetsDir }}/assets;
 
       access_log {{ ../logsDir }}/access_cdn_{{{domain path}}}.log combined buffer=16k flush=5s;
@@ -74,6 +74,7 @@
         try_files /error.html =500;
       }
     }
+
   {{/compare}}
 
 {{/each}}

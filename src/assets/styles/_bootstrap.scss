@@ -1,5 +1,17 @@
 // Mixins Library
-@import "~bourbon/app/assets/stylesheets/bourbon";
+// @import "~bourbon/app/assets/stylesheets/bourbon";
+
+//functions
+@import "./functions/strip-units";
+@import "./functions/px-to-rem";
+
+//mixins
+@import "./mixins/clearfix";
+
+@import "./variables";
+
 
 // Mixins Library
 @import "./mixins/sprite";
+
+
